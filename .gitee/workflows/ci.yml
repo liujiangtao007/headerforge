@@ -1,28 +1,10 @@
-name: HeaderForge CI
+stages:
+  - test
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+test_job:
+  stage: test
+  image: python:3.11          # 官方 Python Docker 镜像
+  script:
+    - pip install pytest
+    - pytest -q
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 克隆仓库
-        uses: actions/checkout@v3
-
-      - name: 设置 Python 环境
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: 安装依赖
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: 运行测试
-        run: |
-          pytest tests
