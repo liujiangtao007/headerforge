@@ -3,8 +3,7 @@ stages:
 
 test_job:
   stage: test
-  image: python:3.11          # 官方 Python Docker 镜像
+  image: python:3.11        # 官方 Python 镜像，干净简洁
   script:
-    - pip install pytest
+    - pip install -q pytest
     - pytest -q
-
